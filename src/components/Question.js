@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 
 class Question extends Component {
   render() {
-    const { question, user } = this.props
+    const { question, user, authedUser } = this.props
     const { optionOne, optionTwo } = question
-    const { id, name, avatarURL } = user
-    const voted = optionOne.votes.some((e) => e === id) || optionTwo.votes.some((e) => e === id)
+    const { name, avatarURL } = user
+    const authedUserVoted = optionOne.votes.some((e) => e === authedUser) || optionTwo.votes.some((e) => e === authedUser)
     const optionOneVotes = optionOne.votes.length
     const optionTwoVotes = optionTwo.votes.length
     const allVotes = optionOneVotes + optionTwoVotes
@@ -27,12 +27,12 @@ class Question extends Component {
           </span>
           <div>
             <div>
-              <span>{optionOne.text}</span>
+              <span className='option-one'>{optionOne.text}</span>
               <span>or</span>
-              <span>{optionTwo.text}</span>
+              <span className='option-two'>{optionTwo.text}</span>
               <span>?</span>
             </div>
-            {voted && 
+            {authedUserVoted && 
               <div>
                 <div>
                   <span>{`${optionOnePerc}% of voters chose this answer`}</span>

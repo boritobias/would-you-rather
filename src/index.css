@@ -63,3 +63,19 @@ li {
   font-size: 18px;
   margin: 10px 0;
 }
+
+.option-one {
+  margin-right: 5px;
+}
+
+.option-two {
+  margin-left: 5px;
+}
+
+.option-one:hover {
+  font-weight: bold;
+}
+
+.option-two:hover {
+  font-weight: bold;
+}
