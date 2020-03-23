@@ -1,17 +1,27 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import QuestionStatistics from './QuestionStatistics'
+import { handleSaveQuestionAnswer } from '../actions/users'
 
 class Question extends Component {
+  state = {
+    value: ''
+  }
+  handleAnswerChoice = (e, value) => {
+    e.preventDefault()
+    this.setState({value})
+    if (this.state.value !== '') {
+      const { authedUser, question, handleSaveQuestionAnswer } = this.props
+      handleSaveQuestionAnswer(authedUser, question.id, this.state.value)
+    }
+  }
+
   render() {
     const { question, user, authedUser } = this.props
-    const { optionOne, optionTwo } = question
-    const { name, avatarURL } = user
+    const { optionOne, optionTwo, id } = question
+    const { name, avatarURL, answers } = user
     const authedUserVoted = optionOne.votes.some((e) => e === authedUser) || optionTwo.votes.some((e) => e === authedUser)
-    const optionOneVotes = optionOne.votes.length
-    const optionTwoVotes = optionTwo.votes.length
-    const allVotes = optionOneVotes + optionTwoVotes
-    const optionOnePerc = Math.floor(optionOneVotes / allVotes * 100)
-    const optionTwoPerc = Math.floor(optionTwoVotes / allVotes * 100)
+    const userAnswer = authedUserVoted && answers[id]
 
     return (
       <div className='question'>
@@ -25,26 +35,28 @@ class Question extends Component {
           <span>
             <div>Would you rather</div>
           </span>
+
           <div>
             <div>
-              <span className='option-one'>{optionOne.text}</span>
-              <span>or</span>
-              <span className='option-two'>{optionTwo.text}</span>
-              <span>?</span>
+              <button className={'option-one'}
+                style={{backgroundColor: `${userAnswer === 'optionOne' && '#7e9caa'}`}}
+                value='optionOne'
+                onClick={this.handleAnswerChoice}
+              >{optionOne.text}</button>
+              <div>or</div>
+              <button className={'option-two'}
+                style={{backgroundColor: `${userAnswer === 'optionTwo' && '#7e9caa'}`}}
+                value='optionTwo'
+                onClick={this.handleAnswerChoice}
+              >{optionTwo.text}</button>
             </div>
+
             {authedUserVoted && 
-              <div>
-                <div>
-                  <span>{`${optionOnePerc}% of voters chose this answer`}</span>
-                  <span>{`${optionTwoPerc}% of voters chose this answer`}</span>
-                </div>
-                <div>
-                  <span>{`${optionOneVotes} out of ${allVotes}`}</span>
-                  <span>{`${optionTwoVotes} out of ${allVotes}`}</span>
-                </div>
-              </div>
+              <QuestionStatistics question={question} />
             }
+
           </div>
+
         </div>
       </div>
     )
@@ -58,8 +70,9 @@ function mapStateToProps({ authedUser, users, questions }, { id }) {
   return {
     authedUser,
     question,
-    user
+    user,
+    users
   }
 }
 
-export default connect(mapStateToProps)(Question)
+export default connect(mapStateToProps, {handleSaveQuestionAnswer})(Question)

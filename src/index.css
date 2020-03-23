@@ -1,3 +1,5 @@
+@import url("https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css");
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -64,18 +66,14 @@ li {
   margin: 10px 0;
 }
 
-.option-one {
-  margin-right: 5px;
-}
-
-.option-two {
-  margin-left: 5px;
-}
-
 .option-one:hover {
-  font-weight: bold;
+  border-color: #f33131;
 }
 
 .option-two:hover {
-  font-weight: bold;
+  border-color: #f33131;
+}
+
+.chosen-answer {
+  color: red;
 }

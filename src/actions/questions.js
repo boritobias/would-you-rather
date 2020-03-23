@@ -1,5 +1,3 @@
-import { _saveQuestionAnswer } from '../utils/_DATA'
-
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
 export const ANSWER_QUESTION = 'ANSWER_QUESTION'
 
@@ -10,23 +8,11 @@ export function receiveQuestions(questions) {
   }
 }
 
-function answerQuestion({ authedUser, id, answer }) {
+export function answerQuestion(authedUser, id, answer) {
   return {
     type: ANSWER_QUESTION,
     authedUser,
     id,
     answer
-  }
-}
-
-export function handleAnswerQuestion(info) {
-  return (dispatch) => {
-    dispatch(answerQuestion(info))
-
-    return _saveQuestionAnswer(info)
-      .catch((e) => {
-        console.warn('Error in handleAnswerQuestion: ', e)
-        // optimistic updates?
-      })
   }
 }
