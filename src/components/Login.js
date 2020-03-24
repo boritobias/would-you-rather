@@ -7,7 +7,7 @@ class Login extends Component {
   state = {
     value: ''
   }
-
+  
   onChange = (e, { value }) => {
     console.log(value)
     this.setState({ value })
