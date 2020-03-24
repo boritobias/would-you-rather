@@ -2,14 +2,21 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import QuestionStatistics from './QuestionStatistics'
 import { handleSaveQuestionAnswer } from '../actions/users'
+import { Container, Form, Header, Segment, Menu, Image, Grid } from 'semantic-ui-react'
 
 class Question extends Component {
   state = {
     value: ''
   }
-  handleAnswerChoice = (e, value) => {
+
+  handleChange = (e, {value}) => {
     e.preventDefault()
     this.setState({value})
+  }
+
+  handleSubmitAnswer = (e) => {
+    e.preventDefault()
+    
     if (this.state.value !== '') {
       const { authedUser, question, handleSaveQuestionAnswer } = this.props
       handleSaveQuestionAnswer(authedUser, question.id, this.state.value)
@@ -17,47 +24,53 @@ class Question extends Component {
   }
 
   render() {
-    const { question, user, authedUser } = this.props
+    const { question, user, authedUser, users } = this.props
     const { optionOne, optionTwo, id } = question
     const { name, avatarURL, answers } = user
-    const authedUserVoted = optionOne.votes.some((e) => e === authedUser) || optionTwo.votes.some((e) => e === authedUser)
-    const userAnswer = authedUserVoted && answers[id]
+    const authedUserVoted = users[authedUser].answers[id] ? true : false
+    const userAnswer = authedUserVoted && users[authedUser].answers[id]
+    const disabled = this.state.value === '' ? true : false
+    
+    console.log(userAnswer)
 
     return (
-      <div className='question'>
-        <img
-          src={avatarURL}
-          alt={`Avatar of ${name}`}
-          className='avatar'
-        />
-        <div className='question-info'>
-          <span>{name}</span>
-          <span>
-            <div>Would you rather</div>
-          </span>
+      <div>
 
-          <div>
-            <div>
-              <button className={'option-one'}
-                style={{backgroundColor: `${userAnswer === 'optionOne' && '#7e9caa'}`}}
-                value='optionOne'
-                onClick={this.handleAnswerChoice}
-              >{optionOne.text}</button>
-              <div>or</div>
-              <button className={'option-two'}
-                style={{backgroundColor: `${userAnswer === 'optionTwo' && '#7e9caa'}`}}
-                value='optionTwo'
-                onClick={this.handleAnswerChoice}
-              >{optionTwo.text}</button>
-            </div>
+        <Container>
+          <Grid>
+            <Grid.Column width={2}>
+              <Image src={avatarURL} alt={`Avatar of ${name}`} size='small' className='avatar' />
+            </Grid.Column>
+            <Grid.Column width={10}>
+              <Form>
+                <Header as='h4'>Question by {name}:</Header>
+                <Header as='h3'>Would you rather</Header>
+                <Form.Radio
+                  label={optionOne.text}
+                  value='optionOne'
+                  checked={this.state.value === 'optionOne'}
+                  onChange={this.handleChange}
+                />
+                {authedUserVoted && 
+                  <QuestionStatistics question={question} option='optionOne' />
+                }
+                <br />
+                <Form.Radio
+                  label={optionTwo.text}
+                  value='optionTwo'
+                  checked={this.state.value === 'optionTwo'}
+                  onChange={this.handleChange}
+                />
+                {authedUserVoted && 
+                  <QuestionStatistics question={question} option='optionTwo' />
+                }
+                <br />
+                <Form.Button fluid disabled={disabled} onClick={this.handleSubmitAnswer}>Submit Answer</Form.Button>
+              </Form>
+            </Grid.Column>
+          </Grid>
+        </Container>
 
-            {authedUserVoted && 
-              <QuestionStatistics question={question} />
-            }
-
-          </div>
-
-        </div>
       </div>
     )
   }

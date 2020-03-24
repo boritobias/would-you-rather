@@ -22,6 +22,7 @@ class App extends Component {
           : <div>
               <Nav />
               <Route path='/leaderboard' component={Leaderboard} />
+              <Question id='vthrdm985a262al8qx3do' />
             </div>
         }
       </Router>
