@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
-import { Form, Dropdown, Button } from 'semantic-ui-react'
+import { Form, Dropdown, Button, Header, Image } from 'semantic-ui-react'
 
 class Login extends Component {
   state = {
     value: ''
   }
-  
+
   onChange = (e, { value }) => {
     console.log(value)
     this.setState({ value })
@@ -34,7 +34,8 @@ class Login extends Component {
     
     return (
       <div>
-        <h4>Log in to use the app</h4>
+        <Header as='h1' textAlign='center'><Image src='https://image.flaticon.com/icons/svg/994/994289.svg' size='small' /> Would you rather? <Image src='https://image.flaticon.com/icons/svg/994/994289.svg' size='small' /> </Header>
+        <Header textAlign='center'>Log in to use the app</Header>
         <Form onSubmit={this.handleSubmit}>
           <Dropdown
             placeholder='Select a user'

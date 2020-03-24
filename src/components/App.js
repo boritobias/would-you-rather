@@ -7,6 +7,7 @@ import Dashboard from './Dashboard'
 import Question from './Question'
 import Login from './Login'
 import Nav from './Nav'
+import Leaderboard from './Leaderboard'
 
 class App extends Component {
   componentDidMount() {
@@ -16,13 +17,13 @@ class App extends Component {
     const { authedUser } = this.props
     return (
       <Router>
-        <div>
-          {authedUser === null ? <Login /> : <Nav />}
-          
-          <div>
-
-          </div>
-        </div>
+        {authedUser === null
+          ? <Login />
+          : <div>
+              <Nav />
+              <Route path='/leaderboard' component={Leaderboard} />
+            </div>
+        }
       </Router>
 
     )
