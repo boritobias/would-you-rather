@@ -9,6 +9,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   padding: 16px;
   color: #252525;
+  background-color: #faf5ef;
 }
 
 code {
@@ -26,14 +27,29 @@ li {
   text-decoration: none;
 }
 
+.navbar {
+  margin-bottom: 20px;
+}
+
+.app-header {
+  background-color: #99b19c;
+  padding: 20px;
+  border-radius: 15px;
+}
+
 .center {
   text-align: center;
+}
+
+.login-center {
+  margin: auto;
+  width: 50%;
 }
 
 .avatar {
   height: 50px;
   border-radius: 25px;
-  margin: 10px;
+  margin-left: 8px;
 }
 
 .question {
@@ -66,14 +82,14 @@ li {
   margin: 10px 0;
 }
 
-.option-one:hover {
-  border-color: #f33131;
-}
-
-.option-two:hover {
-  border-color: #f33131;
-}
-
 .chosen-answer {
-  color: red;
+  border: 5px #99b19c solid;
+  background-color: #99b19c;
+  border-radius: 15px;
+  padding: 5px;
+}
+
+.not-chosen-answer {
+  border: none;
+  padding: 5px;
 }

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
-import { Form, Dropdown, Button, Header, Image } from 'semantic-ui-react'
+import { Form, Dropdown, Button, Header } from 'semantic-ui-react'
+import AppHeader from './AppHeader'
 
 class Login extends Component {
   state = {
@@ -34,9 +35,9 @@ class Login extends Component {
     
     return (
       <div>
-        <Header as='h1' textAlign='center'><Image src='https://image.flaticon.com/icons/svg/994/994289.svg' size='small' /> Would you rather? <Image src='https://image.flaticon.com/icons/svg/994/994289.svg' size='small' /> </Header>
+       <AppHeader />
         <Header textAlign='center'>Log in to use the app</Header>
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit} className='login-center'>
           <Dropdown
             placeholder='Select a user'
             fluid

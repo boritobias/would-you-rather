@@ -29,22 +29,21 @@ const sortedUserList = userList.sort((a, b) => b.sum - a.sum)
         <Header as='h2' textAlign='center'>Leaderboard</Header>
         <br />
 
-        <Table>
-          <Table.Header>
+        <Table className='form-center'>
+          <Table.Header className='center'>
             <Table.Row>
+              <Table.HeaderCell />
               <Table.HeaderCell>User</Table.HeaderCell>
               <Table.HeaderCell>Questions Asked</Table.HeaderCell>
               <Table.HeaderCell>Questions Answered</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-          <Table.Body>
+          <Table.Body className='center'>
             {sortedUserList.map((user) => (
               <Table.Row key={user.id}>
+                <Table.Cell><Image src={user.avatarURL} size='mini' className='avatar' /></Table.Cell>
                 <Table.Cell>
-                  <Header as='h4' image>
-                    <Image src={user.avatarURL} size='mini' />
-                    <Header.Content>{user.name}</Header.Content>
-                  </Header>
+                  <Header as='h4'>{user.name}</Header>
                 </Table.Cell>
                 <Table.Cell>{user.numOfQuestions}</Table.Cell>
                 <Table.Cell>{user.numOfAnswers}</Table.Cell>
