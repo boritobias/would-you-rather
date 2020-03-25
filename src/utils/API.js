@@ -5,7 +5,7 @@ import {
   _saveQuestionAnswer
 } from './_DATA'
 
-export function getInitialData () {
+export function getInitialData() {
   return Promise.all([
     _getUsers(),
     _getQuestions(),
@@ -15,10 +15,10 @@ export function getInitialData () {
   }))
 }
 
-export function saveQuestionAnswer (authedUser, id, answer) {
-  return _saveQuestionAnswer({ authedUser, id, answer })
+export function saveQuestionAnswer(authedUser, qid, answer) {
+  return _saveQuestionAnswer({ authedUser, qid, answer })
 }
   
-export function saveQuestion (question) {
+export function saveQuestion(question) {
   return _saveQuestion(question)
 }

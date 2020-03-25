@@ -12,7 +12,7 @@ export function receiveUsers(users) {
 }
 
 function addAnswerToUser(authedUser, id, answer) {
-  return{
+  return {
     type: ADD_ANSWER_TO_USER,
     authedUser,
     id,

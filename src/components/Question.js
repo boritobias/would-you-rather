@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import QuestionStatistics from './QuestionStatistics'
 import { handleSaveQuestionAnswer } from '../actions/users'
-import { Container, Form, Header, Segment, Menu, Image, Grid } from 'semantic-ui-react'
+import { Container, Form, Header, Image, Grid } from 'semantic-ui-react'
 
 class Question extends Component {
   state = {
@@ -10,7 +10,6 @@ class Question extends Component {
   }
 
   handleChange = (e, {value}) => {
-    e.preventDefault()
     this.setState({value})
   }
 
@@ -20,6 +19,7 @@ class Question extends Component {
     if (this.state.value !== '') {
       const { authedUser, question, handleSaveQuestionAnswer } = this.props
       handleSaveQuestionAnswer(authedUser, question.id, this.state.value)
+      this.setState({value: ''})
     }
   }
 
@@ -30,8 +30,6 @@ class Question extends Component {
     const authedUserVoted = users[authedUser].answers[id] ? true : false
     const userAnswer = authedUserVoted && users[authedUser].answers[id]
     const disabled = this.state.value === '' ? true : false
-
-    console.log(this.state.value)
 
     return (
       <div>
@@ -96,7 +94,8 @@ class Question extends Component {
   }
 }
 
-function mapStateToProps({ authedUser, users, questions }, { id }) {
+function mapStateToProps({ authedUser, users, questions }, props) {
+  const { id } = props.match.params
   const question = questions[id]
   const user = users[question.author]
 

@@ -1,53 +1,51 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Button, List } from 'semantic-ui-react'
 import Question from './Question'
+import QuestionTeaser from './QuestionTeaser'
 
 class Dashboard extends Component {
   state = {
     showAnswered: false
   }
 
-  handleToggle = (e) => {
-    e.preventDefault()
+  handleClick = (value) => {
 
-    this.setState((prevState) => ({
-      showAnswered: !prevState.showAnswered
-    }))
+    this.setState({
+      showAnswered: value
+    })
   }
 
   render() {
     return (
       <div>
-        <h3 className='center'>Would you rather?</h3>
+        <Button.Group attached='top' widths={2}>
+          <Button onClick={() => this.handleClick(false)}>UNANSWERED</Button>
+          <Button onClick={() => this.handleClick(true)}>ANSWERED</Button>
+        </Button.Group>
 
-        <button className='toggle-button'
-          onClick={this.handleToggle}
-        >
-          {this.state.showAnswered ? 'SHOW UNANSWERED' : 'SHOW ANSWERED'}
-        </button>
+        <br />
 
         {this.state.showAnswered
           ? <div className='answered'>
-              <h4>Answered</h4>
-              <ul>
+              <List>
                 {this.props.questionIds.map((id) => (
                   this.props.authedUserAnswerIds.some((e) => e === id) &&
-                  <li key={id}>
-                    <Question id={id} />
-                  </li>
+                  <List.Item key={id}>
+                    <QuestionTeaser id={id} />
+                  </List.Item>
                 ))}
-              </ul>
+              </List>
             </div>
           : <div className='unanswered'>
-              <h4>Unanswered</h4>
-              <ul>
+              <List>
                 {this.props.questionIds.map((id) => (
                   !this.props.authedUserAnswerIds.some((e) => e === id) &&
-                  <li key={id}>
-                    <Question id={id} />
-                  </li>
+                  <List.Item key={id}>
+                    <QuestionTeaser id={id} />
+                  </List.Item>
                 ))}
-              </ul>
+              </List>
             </div>
         }
       </div>
