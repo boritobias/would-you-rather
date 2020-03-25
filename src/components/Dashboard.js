@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Button, List } from 'semantic-ui-react'
-import Question from './Question'
+import { Button, List, Tab } from 'semantic-ui-react'
 import QuestionTeaser from './QuestionTeaser'
 
 class Dashboard extends Component {
@@ -17,37 +16,31 @@ class Dashboard extends Component {
   }
 
   render() {
+    const panes = [
+      { menuItem: 'Unanswered', render: () => (
+        <List>
+          {this.props.questionIds.map((id) => (
+            !this.props.authedUserAnswerIds.some((e) => e === id) &&
+            <List.Item key={id}>
+              <QuestionTeaser id={id} />
+            </List.Item>
+          ))}
+        </List>
+      )},
+      { menuItem: 'Answered', render: () => (
+        <List>
+          {this.props.questionIds.map((id) => (
+            this.props.authedUserAnswerIds.some((e) => e === id) &&
+            <List.Item key={id}>
+              <QuestionTeaser id={id} />
+            </List.Item>
+          ))}
+        </List>
+      )},
+    ]
     return (
       <div>
-        <Button.Group attached='top' widths={2}>
-          <Button onClick={() => this.handleClick(false)}>UNANSWERED</Button>
-          <Button onClick={() => this.handleClick(true)}>ANSWERED</Button>
-        </Button.Group>
-
-        <br />
-
-        {this.state.showAnswered
-          ? <div className='answered'>
-              <List>
-                {this.props.questionIds.map((id) => (
-                  this.props.authedUserAnswerIds.some((e) => e === id) &&
-                  <List.Item key={id}>
-                    <QuestionTeaser id={id} />
-                  </List.Item>
-                ))}
-              </List>
-            </div>
-          : <div className='unanswered'>
-              <List>
-                {this.props.questionIds.map((id) => (
-                  !this.props.authedUserAnswerIds.some((e) => e === id) &&
-                  <List.Item key={id}>
-                    <QuestionTeaser id={id} />
-                  </List.Item>
-                ))}
-              </List>
-            </div>
-        }
+        <Tab panes={panes} width={2} />
       </div>
     )
   }
