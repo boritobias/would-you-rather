@@ -7,6 +7,7 @@ import Question from './Question'
 import Login from './Login'
 import Nav from './Nav'
 import Leaderboard from './Leaderboard'
+import NewQuestion from './NewQuestion'
 
 class App extends Component {
   componentDidMount() {
@@ -25,6 +26,7 @@ class App extends Component {
                 <Route path='/' exact component={Dashboard} />
                 <Route path='/leaderboard' component={Leaderboard} />
                 <Route path='/questions/:id' component={Question} />
+                <Route path='/new' component={NewQuestion} />
               </div>
             </div>
         }
@@ -46,3 +48,4 @@ export default connect(mapStateToProps)(App)
 // <Route path='/' exact component={Dashboard} />
 // <Route path='/question/:id' component={Question} />
 // <Question id='vthrdm985a262al8qx3do' />
+// <Route path='/404' component={NotFound}/>
