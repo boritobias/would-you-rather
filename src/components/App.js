@@ -1,6 +1,7 @@
 import React, { Component, Fragment  } from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import LoadingBar from 'react-redux-loading-bar'
 import { handleInitialData } from '../actions/shared'
 import Dashboard from './Dashboard'
 import Question from './Question'
@@ -21,6 +22,7 @@ class App extends Component {
     return (
       <Router>
         <Fragment>
+          <LoadingBar />
           {authedUser === null
             ? <Route path='/' component={Login} />
             : <Fragment>
@@ -29,7 +31,7 @@ class App extends Component {
                   <Route path='/' exact component={Dashboard} />
                   <Route path='/leaderboard' component={Leaderboard} />
                   <Route path='/questions/:id' component={Question} />
-                  <Route path='/new' component={NewQuestion} />
+                  <Route path='/add' component={NewQuestion} />
                   <Route component={NoMatch} />
                 </Switch>
               </Fragment>

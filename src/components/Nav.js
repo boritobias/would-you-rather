@@ -18,7 +18,7 @@ class Nav extends Component {
         <AppHeader />
         <Menu>
           <Menu.Item name='home' as={NavLink} exact to='/' />
-          <Menu.Item name='new question' as={NavLink} to='/new' />
+          <Menu.Item name='new question' as={NavLink} to='/add' />
           <Menu.Item name='leaderboard' as={NavLink} to='/leaderboard' />
           <Menu.Item position='right'>Logged in as {loggedInUser.name} <Image src={loggedInUser.avatarURL} alt={`Avatar of ${loggedInUser.name}`} size='mini' className='avatar' /></Menu.Item>
           <Menu.Item name='log out' position='right' as={NavLink} to='/login' onClick={this.handleLogOut} />
