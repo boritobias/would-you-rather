@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Button, List, Tab } from 'semantic-ui-react'
+import { List, Tab, Container } from 'semantic-ui-react'
 import QuestionTeaser from './QuestionTeaser'
 
 class Dashboard extends Component {
@@ -39,9 +39,9 @@ class Dashboard extends Component {
       )},
     ]
     return (
-      <div>
-        <Tab panes={panes} width={2} />
-      </div>
+      <Container style={{width: '60%'}}>
+        <Tab panes={panes} />
+      </Container>
     )
   }
 }

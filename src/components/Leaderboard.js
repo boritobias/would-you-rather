@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Header, Image, Table, Tab } from 'semantic-ui-react'
+import { Header, Image, Table, Container } from 'semantic-ui-react'
 import { Icon } from 'semantic-ui-react'
 
 class Leaderboard extends Component {
@@ -27,9 +27,9 @@ class Leaderboard extends Component {
     const tropySize = ['big', 'large']
 
     return (
-      <div>
-        <br />
+      <Container>
         <Header as='h2' textAlign='center'>Leaderboard</Header>
+        
         <br />
 
         <Table className='form-center'>
@@ -56,8 +56,7 @@ class Leaderboard extends Component {
             ))}
           </Table.Body>
         </Table>
-
-      </div>
+      </Container>
     )
   }
 }

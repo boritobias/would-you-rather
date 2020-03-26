@@ -23,6 +23,7 @@ class Nav extends Component {
           <Menu.Item position='right'>Logged in as {loggedInUser.name} <Image src={loggedInUser.avatarURL} alt={`Avatar of ${loggedInUser.name}`} size='mini' className='avatar' /></Menu.Item>
           <Menu.Item name='log out' position='right' as={NavLink} to='/login' onClick={this.handleLogOut} />
         </Menu>
+        <br />
       </div>
     )
   }

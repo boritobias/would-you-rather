@@ -32,64 +32,59 @@ class Question extends Component {
     const disabled = this.state.value === '' ? true : false
 
     return (
-      <div>
-
-        <Container>
-          <Grid>
-            <Grid.Column width={2}>
-              <Image src={avatarURL} alt={`Avatar of ${name}`} size='small' className='avatar' />
-            </Grid.Column>
-            <Grid.Column width={10}>
-              <Form>
-                <Header as='h4' className='question-header'>Question by {name}:</Header>
-                <Header as='h3'>Would you rather</Header>
-                <Form.Group style={{'display': 'block'}} className={userAnswer === 'optionOne' ? 'chosen-answer' : 'not-chosen-answer'}>
-                  <Form.Field>
-                    <Form.Radio
-                      label={optionOne.text}
-                      value='optionOne'
-                      readOnly={authedUserVoted}
-                      checked={userAnswer === 'optionOne' || this.state.value === 'optionOne'}
-                      onChange={this.handleChange}
-                    />
-                  </Form.Field>
-                  
-                  <Form.Field>
-                    {authedUserVoted && 
-                      <QuestionStatistics question={question} option='optionOne' />
-                    }
-                  </Form.Field>
-                  
-                </Form.Group>
-
-                <br />
-
-                <Form.Group style={{'display': 'block'}}  className={userAnswer === 'optionTwo' ? 'chosen-answer' : 'not-chosen-answer'}>
+      <Container>
+        <Grid>
+          <Grid.Column width={3}>
+            <Image src={avatarURL} alt={`Avatar of ${name}`} size='tiny' className='avatar' />
+          </Grid.Column>
+          <Grid.Column width={6}>
+            <Form>
+              <Header as='h4' className='question-header' style={{color: '#969696'}}>Question by {name}:</Header>
+              <Header as='h3'>Would you rather</Header>
+              <Form.Group style={{'display': 'block'}} className={userAnswer === 'optionOne' ? 'chosen-answer' : 'not-chosen-answer'}>
                 <Form.Field>
                   <Form.Radio
-                    label={optionTwo.text}
-                    value='optionTwo'
+                    label={optionOne.text}
+                    value='optionOne'
                     readOnly={authedUserVoted}
-                    checked={userAnswer === 'optionTwo' || this.state.value === 'optionTwo'}
+                    checked={userAnswer === 'optionOne' || this.state.value === 'optionOne'}
                     onChange={this.handleChange}
                   />
-                  </Form.Field>
-                  <Form.Field>
+                </Form.Field>
+
+                <Form.Field>
                   {authedUserVoted && 
-                    <QuestionStatistics question={question} option='optionTwo' />
+                    <QuestionStatistics question={question} option='optionOne' />
                   }
-                  </Form.Field>
-                </Form.Group>
-               
-                <br />
+                </Form.Field>
+              </Form.Group>
 
-                <Form.Button fluid disabled={disabled} onClick={this.handleSubmitAnswer}>Submit Answer</Form.Button>
-              </Form>
-            </Grid.Column>
-          </Grid>
-        </Container>
+              <br />
 
-      </div>
+              <Form.Group style={{'display': 'block'}}  className={userAnswer === 'optionTwo' ? 'chosen-answer' : 'not-chosen-answer'}>
+              <Form.Field>
+                <Form.Radio
+                  label={optionTwo.text}
+                  value='optionTwo'
+                  readOnly={authedUserVoted}
+                  checked={userAnswer === 'optionTwo' || this.state.value === 'optionTwo'}
+                  onChange={this.handleChange}
+                />
+                </Form.Field>
+                <Form.Field>
+                {authedUserVoted && 
+                  <QuestionStatistics question={question} option='optionTwo' />
+                }
+                </Form.Field>
+              </Form.Group>
+              
+              <br />
+
+              <Form.Button fluid disabled={disabled} onClick={this.handleSubmitAnswer}>Submit Answer</Form.Button>
+            </Form>
+          </Grid.Column>
+        </Grid>
+      </Container>
     )
   }
 }
