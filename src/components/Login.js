@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { setAuthedUser } from '../actions/authedUser'
 import { Form, Dropdown, Button, Header } from 'semantic-ui-react'
+import { setAuthedUser } from '../actions/authedUser'
 import AppHeader from './AppHeader'
 
 class Login extends Component {
@@ -21,7 +21,7 @@ class Login extends Component {
 
   dropdownOptions = () => {
     const { users } = this.props
-    
+
     return users.map((user) => ({
       key: user.id,
       text: user.name,
@@ -29,9 +29,10 @@ class Login extends Component {
       image: { avatar: true, src: user.avatarURL },
     }))
   }
+
   render() {
     const disabled = this.state.value === '' ? true : false
-    
+
     return (
       <div>
        <AppHeader />

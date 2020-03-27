@@ -32,12 +32,13 @@ function addQuestion(question) {
 export function handleSaveQuestion(optionOneText, optionTwoText, author) {
   return dispatch => {
     dispatch(showLoading())
-    return saveQuestion({ optionOneText, optionTwoText, author }).then(
-      question => {
-        dispatch(addQuestion(question))
-        dispatch(addQuestionToUser(question))
-        dispatch(hideLoading())
-      }
-    );
-  };
+    return saveQuestion({ optionOneText, optionTwoText, author })
+      .then(
+        question => {
+          dispatch(addQuestion(question))
+          dispatch(addQuestionToUser(question))
+          dispatch(hideLoading())
+        }
+    )
+  }
 }

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import QuestionStatistics from './QuestionStatistics'
-import { handleSaveQuestionAnswer } from '../actions/users'
 import { Container, Form, Header, Image, Grid } from 'semantic-ui-react'
+import { handleSaveQuestionAnswer } from '../actions/users'
+import QuestionStatistics from './QuestionStatistics'
 
 class Question extends Component {
   state = {
@@ -51,7 +51,6 @@ class Question extends Component {
                     onChange={this.handleChange}
                   />
                 </Form.Field>
-
                 <Form.Field>
                   {authedUserVoted && 
                     <QuestionStatistics question={question} option='optionOne' />

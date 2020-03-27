@@ -49,9 +49,3 @@ function mapStateToProps({ authedUser }) {
 }
 
 export default connect(mapStateToProps)(App)
-
-
-// <Route path='/' exact component={Dashboard} />
-// <Route path='/question/:id' component={Question} />
-// <Question id='vthrdm985a262al8qx3do' />
-// <Route path='/404' component={NotFound}/>

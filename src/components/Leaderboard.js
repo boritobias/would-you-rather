@@ -29,7 +29,7 @@ class Leaderboard extends Component {
     return (
       <Container>
         <Header as='h2' textAlign='center'>Leaderboard</Header>
-        
+
         <br />
 
         <Table className='form-center'>

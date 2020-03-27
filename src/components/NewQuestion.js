@@ -37,7 +37,9 @@ class NewQuestion extends Component {
     return (
       <Container style={{width: '50%'}}>
         <Header as='h2' textAlign='center'>Create New Question</Header>
+
         <br />
+
         <Header as='h3' textAlign='center'>Would you rather</Header>
         <Form onSubmit={this.handleSubmit}>
           <Form.Field>

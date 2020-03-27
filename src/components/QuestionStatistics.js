@@ -22,7 +22,7 @@ class QuestionStatistics extends Component {
             </div>
           </div>
         )
-        
+
       case 'optionTwo' :
         return (
           <div>
@@ -34,10 +34,7 @@ class QuestionStatistics extends Component {
             </div>
           </div>
         )
-        
-      
     }
-
   }
 }
 

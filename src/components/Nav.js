@@ -10,9 +10,11 @@ class Nav extends Component {
     e.preventDefault()
     this.props.dispatch(setAuthedUser(null))
   }
+
   render() {
     const { authedUser, users } = this.props
     const loggedInUser = authedUser && users[authedUser]
+
     return (
       <div className='navbar'>
         <AppHeader />
@@ -23,7 +25,9 @@ class Nav extends Component {
           <Menu.Item position='right'>Logged in as {loggedInUser.name} <Image src={loggedInUser.avatarURL} alt={`Avatar of ${loggedInUser.name}`} size='mini' className='avatar' /></Menu.Item>
           <Menu.Item name='log out' position='right' as={NavLink} to='/login' onClick={this.handleLogOut} />
         </Menu>
+
         <br />
+
       </div>
     )
   }
