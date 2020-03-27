@@ -34,6 +34,11 @@ class QuestionStatistics extends Component {
             </div>
           </div>
         )
+
+      default :
+        return (
+          console.warn('Invalid option')
+        )
     }
   }
 }

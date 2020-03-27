@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Container, Form, Header, Image, Grid } from 'semantic-ui-react'
 import { handleSaveQuestionAnswer } from '../actions/users'
 import QuestionStatistics from './QuestionStatistics'
+import NoMatch from './NoMatch'
 
 class Question extends Component {
   state = {
@@ -24,6 +25,12 @@ class Question extends Component {
   }
 
   render() {
+    if (this.props.noMatch) {
+      return (
+        <NoMatch />
+      )
+    } else {
+
     const { question, user, authedUser, users } = this.props
     const { optionOne, optionTwo, id } = question
     const { name, avatarURL } = user
@@ -84,20 +91,28 @@ class Question extends Component {
           </Grid.Column>
         </Grid>
       </Container>
-    )
+    )}
   }
 }
 
 function mapStateToProps({ authedUser, users, questions }, props) {
   const { id } = props.match.params
-  const question = questions[id]
-  const user = users[question.author]
+  const noMatch = questions[id] === undefined ? true : false
+  if (!noMatch) {
+    const question = questions[id]
+    const user = users[question.author]
 
-  return {
-    authedUser,
-    question,
-    user,
-    users
+    return {
+      authedUser,
+      question,
+      user,
+      users,
+      noMatch
+    }
+  } else {
+    return {
+      noMatch
+    }
   }
 }
 

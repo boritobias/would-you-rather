@@ -31,6 +31,7 @@ class App extends Component {
                   <Route path='/' exact component={Dashboard} />
                   <Route path='/leaderboard' component={Leaderboard} />
                   <Route path='/add' component={NewQuestion} />
+                  <Route path='/questions/id' component={NoMatch} />
                   <Route path='/questions/:id' component={Question} />
                   <Route component={NoMatch} />
                 </Switch>
