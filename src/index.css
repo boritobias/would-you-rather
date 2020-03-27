@@ -12,21 +12,6 @@ body {
   background-color: #faf5ef;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-ul {
-  padding-left: 0;
-}
-
-li {
-  list-style-type: none;
-  padding: 10px;
-  text-decoration: none;
-}
-
 .navbar {
   margin-bottom: 20px;
 }
@@ -50,36 +35,6 @@ li {
   height: 50px;
   border-radius: 25px;
   margin-left: 8px;
-}
-
-.question {
-  width: 100%;
-  max-width: 590px;
-  padding: 10px;
-  display: flex;
-  margin: 0 auto;
-  border: 1px solid #dad7d7;
-  border-radius: 3px;
-  cursor: pointer;
-}
-
-.question-info {
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-}
-
-.question-info > div > span {
-  margin-right: 5px;
-}
-
-.question-info > div > div {
-  color: #969696;
-  font-size: 15px;
-}
-.question-info > div > p {
-  font-size: 18px;
-  margin: 10px 0;
 }
 
 .chosen-answer {

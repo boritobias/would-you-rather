@@ -30,8 +30,8 @@ class App extends Component {
                 <Switch>
                   <Route path='/' exact component={Dashboard} />
                   <Route path='/leaderboard' component={Leaderboard} />
-                  <Route path='/questions/:id' component={Question} />
                   <Route path='/add' component={NewQuestion} />
+                  <Route path='/questions/:id' component={Question} />
                   <Route component={NoMatch} />
                 </Switch>
               </Fragment>
