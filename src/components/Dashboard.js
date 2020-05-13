@@ -1,26 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { List, Tab, Container } from 'semantic-ui-react'
 import QuestionTeaser from './QuestionTeaser'
 
-class Dashboard extends Component {
-  state = {
-    showAnswered: false
-  }
-
-  handleClick = (value) => {
-
-    this.setState({
-      showAnswered: value
-    })
-  }
-
-  render() {
+function Dashboard(props) {
     const panes = [
       { menuItem: 'Unanswered', render: () => (
         <List>
-          {this.props.questionIds.map((id) => (
-            !this.props.authedUserAnswerIds.some((e) => e === id) &&
+          {props.questionIds.map((id) => (
+            !props.authedUserAnswerIds.some((e) => e === id) &&
             <List.Item key={id}>
               <QuestionTeaser id={id} />
             </List.Item>
@@ -29,8 +17,8 @@ class Dashboard extends Component {
       )},
       { menuItem: 'Answered', render: () => (
         <List>
-          {this.props.questionIds.map((id) => (
-            this.props.authedUserAnswerIds.some((e) => e === id) &&
+          {props.questionIds.map((id) => (
+            props.authedUserAnswerIds.some((e) => e === id) &&
             <List.Item key={id}>
               <QuestionTeaser id={id} />
             </List.Item>
@@ -43,7 +31,6 @@ class Dashboard extends Component {
         <Tab panes={panes} />
       </Container>
     )
-  }
 }
 
 function mapStateToProps({ authedUser, users, questions}) {
