@@ -1,46 +1,42 @@
-import React, { Component } from 'react'
+import React from 'react';
 
-class QuestionStatistics extends Component {
-  render() {
-    const { question, option } = this.props
+function QuestionStatistics(props) {
+  const { question, option } = props;
 
-    const optionOneVotes = question.optionOne.votes.length
-    const optionTwoVotes = question.optionTwo.votes.length
-    const allVotes = optionOneVotes + optionTwoVotes
-    const optionOnePerc = Math.floor(optionOneVotes / allVotes * 100)
-    const optionTwoPerc = Math.floor(optionTwoVotes / allVotes * 100)
+  const optionOneVotes = question.optionOne.votes.length;
+  const optionTwoVotes = question.optionTwo.votes.length;
+  const allVotes = optionOneVotes + optionTwoVotes;
+  const optionOnePerc = Math.floor((optionOneVotes / allVotes) * 100);
+  const optionTwoPerc = Math.floor((optionTwoVotes / allVotes) * 100);
 
-    switch(option) {
-      case 'optionOne' :
-        return (
+  switch (option) {
+    case 'optionOne':
+      return (
+        <div>
           <div>
-            <div>
-              <div>{`${optionOnePerc}% of voters chose this answer`}</div>
-            </div>
-            <div>
-              <div>{`${optionOneVotes} out of ${allVotes}`}</div>
-            </div>
+            <div>{`${optionOnePerc}% of voters chose this answer`}</div>
           </div>
-        )
-
-      case 'optionTwo' :
-        return (
           <div>
-            <div>
-              <div>{`${optionTwoPerc}% of voters chose this answer`}</div>
-            </div>
-            <div>
-              <div>{`${optionTwoVotes} out of ${allVotes}`}</div>
-            </div>
+            <div>{`${optionOneVotes} out of ${allVotes}`}</div>
           </div>
-        )
+        </div>
+      );
 
-      default :
-        return (
-          console.warn('Invalid option')
-        )
-    }
+    case 'optionTwo':
+      return (
+        <div>
+          <div>
+            <div>{`${optionTwoPerc}% of voters chose this answer`}</div>
+          </div>
+          <div>
+            <div>{`${optionTwoVotes} out of ${allVotes}`}</div>
+          </div>
+        </div>
+      );
+
+    default:
+      return console.warn('Invalid option');
   }
 }
 
-export default QuestionStatistics
+export default QuestionStatistics;
