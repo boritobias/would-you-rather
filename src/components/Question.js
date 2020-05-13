@@ -1,42 +1,39 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Container, Form, Header, Image, Grid } from 'semantic-ui-react'
 import { handleSaveQuestionAnswer } from '../actions/users'
 import QuestionStatistics from './QuestionStatistics'
 import NoMatch from './NoMatch'
 
-class Question extends Component {
-  state = {
-    value: ''
+function Question(props) {
+  const [value, setValue] = useState('')
+
+  const handleChange = (e, {value}) => {
+    setValue(value)
   }
 
-  handleChange = (e, {value}) => {
-    this.setState({value})
-  }
-
-  handleSubmitAnswer = (e) => {
+  const handleSubmitAnswer = (e) => {
     e.preventDefault()
     
-    if (this.state.value !== '') {
-      const { authedUser, question, handleSaveQuestionAnswer } = this.props
-      handleSaveQuestionAnswer(authedUser, question.id, this.state.value)
-      this.setState({value: ''})
+    if (value !== '') {
+      const { authedUser, question, handleSaveQuestionAnswer } = props
+      handleSaveQuestionAnswer(authedUser, question.id, value)
+      setValue('')
     }
   }
 
-  render() {
-    if (this.props.noMatch) {
+    if (props.noMatch) {
       return (
         <NoMatch />
       )
     } else {
 
-    const { question, user, authedUser, users } = this.props
+    const { question, user, authedUser, users } = props
     const { optionOne, optionTwo, id } = question
     const { name, avatarURL } = user
     const authedUserVoted = users[authedUser].answers[id] ? true : false
     const userAnswer = authedUserVoted && users[authedUser].answers[id]
-    const disabled = this.state.value === '' ? true : false
+    const disabled = value === '' ? true : false
 
     return (
       <Container>
@@ -54,8 +51,8 @@ class Question extends Component {
                     label={optionOne.text}
                     value='optionOne'
                     readOnly={authedUserVoted}
-                    checked={userAnswer === 'optionOne' || this.state.value === 'optionOne'}
-                    onChange={this.handleChange}
+                    checked={userAnswer === 'optionOne' || value === 'optionOne'}
+                    onChange={handleChange}
                   />
                 </Form.Field>
                 <Form.Field>
@@ -73,8 +70,8 @@ class Question extends Component {
                   label={optionTwo.text}
                   value='optionTwo'
                   readOnly={authedUserVoted}
-                  checked={userAnswer === 'optionTwo' || this.state.value === 'optionTwo'}
-                  onChange={this.handleChange}
+                  checked={userAnswer === 'optionTwo' || value === 'optionTwo'}
+                  onChange={handleChange}
                 />
                 </Form.Field>
                 <Form.Field>
@@ -86,13 +83,12 @@ class Question extends Component {
               
               <br />
 
-              <Form.Button fluid disabled={disabled} onClick={this.handleSubmitAnswer}>Submit Answer</Form.Button>
+              <Form.Button fluid disabled={disabled} onClick={handleSubmitAnswer}>Submit Answer</Form.Button>
             </Form>
           </Grid.Column>
         </Grid>
       </Container>
     )}
-  }
 }
 
 function mapStateToProps({ authedUser, users, questions }, props) {
