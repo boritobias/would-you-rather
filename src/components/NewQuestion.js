@@ -1,65 +1,74 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
-import { Button, Form, Header, Container } from 'semantic-ui-react'
-import { handleSaveQuestion } from '../actions/questions'
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { Button, Form, Header, Container } from 'semantic-ui-react';
+import { handleSaveQuestion } from '../actions/questions';
 
-class NewQuestion extends Component {
-  state = {
+function NewQuestion(props) {
+  const [options, setOptions] = useState({
     optionOne: '',
     optionTwo: '',
-    toHome: false
-  }
+  });
+  const [toHome, setToHome] = useState(false);
 
-  handleInputChange = (e) => {
-    e.preventDefault()
-    this.setState({ [e.target.id]: e.target.value })
-  }
+  const handleInputChange = (e) => {
+    e.preventDefault();
 
-  handleSubmit = (e) => {
-    const { optionOne, optionTwo } = this.state
-    const { authedUser, handleSaveQuestion } = this.props
-    handleSaveQuestion(optionOne, optionTwo, authedUser)
-    this.setState({
+    const { name, value } = e.target;
+    setOptions((prevOptions) => ({
+      ...prevOptions,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    const { optionOne, optionTwo } = options;
+    const { authedUser, handleSaveQuestion } = props;
+    handleSaveQuestion(optionOne, optionTwo, authedUser);
+
+    setOptions({
       optionOne: '',
       optionTwo: '',
-      toHome: true
-    })
+    });
+    setToHome(true);
+  };
+  const { optionOne, optionTwo } = options;
+
+  if (toHome) {
+    return <Redirect to='/' />;
   }
 
-  render() {
-    const { optionOne, optionTwo, toHome } = this.state
+  return (
+    <Container style={{ width: '50%' }}>
+      <Header as='h2' textAlign='center'>
+        Create New Question
+      </Header>
 
-    if (toHome) {
-      return <Redirect to='/' />
-    }
+      <br />
 
-    return (
-      <Container style={{width: '50%'}}>
-        <Header as='h2' textAlign='center'>Create New Question</Header>
-
-        <br />
-
-        <Header as='h3' textAlign='center'>Would you rather</Header>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Field>
-            <input required placeholder='Option 1' value={optionOne} onChange={this.handleInputChange} id='optionOne' />
-          </Form.Field>
-          <Header as='h4' textAlign='center'>or</Header>
-          <Form.Field>
-            <input required placeholder='Option 2' value={optionTwo} onChange={this.handleInputChange} id='optionTwo' />
-          </Form.Field>
-          <Button type='submit'>Submit New Question</Button>
-        </Form>
-      </Container>
-    )
-  }
+      <Header as='h3' textAlign='center'>
+        Would you rather
+      </Header>
+      <Form onSubmit={handleSubmit}>
+        <Form.Field>
+          <input required placeholder='Option 1' value={optionOne} onChange={handleInputChange} name='optionOne' />
+        </Form.Field>
+        <Header as='h4' textAlign='center'>
+          or
+        </Header>
+        <Form.Field>
+          <input required placeholder='Option 2' value={optionTwo} onChange={handleInputChange} name='optionTwo' />
+        </Form.Field>
+        <Button type='submit'>Submit New Question</Button>
+      </Form>
+    </Container>
+  );
 }
 
 function mapStateToProps({ authedUser }) {
   return {
-    authedUser
-  }
+    authedUser,
+  };
 }
 
-export default connect(mapStateToProps, { handleSaveQuestion })(NewQuestion)
+export default connect(mapStateToProps, { handleSaveQuestion })(NewQuestion);
