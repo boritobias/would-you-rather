@@ -11,7 +11,7 @@ This is the final assessment project for Udacity's React & Redux course, the 'Wo
 
 
 ## Live link
-[Would you rather app](https://would-you-rather-app-umfnx97lv.herokuapp.com/leaderboard)
+[Would you rather app](https://would-you-rather-app-umfnx97lv.herokuapp.com/)
 
 ## How to use
 
